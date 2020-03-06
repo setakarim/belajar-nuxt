@@ -1,5 +1,7 @@
 <template>
-  <b-container fluid="md">
+  <b-container fluid="md" class="mt--4">
+    <h1>Todo List</h1>
+    <nuxt-link to="/todo/create"><button>Create Todo</button></nuxt-link>
     <div v-if="isLoading">
       <b-spinner type="grow" label="Loading..."></b-spinner>
     </div>
@@ -10,7 +12,6 @@
       <b-alert show variant="info">Data Kosong</b-alert>
     </div>
     <div v-else>
-      <h1>Todo List</h1>
       <table border="1 solid">
         <thead>
           <tr>
@@ -21,7 +22,12 @@
           </tr>
         </thead>
         <tbody>
-          <TodoListItem :data="todo" v-for="todo in todos" :key="todo.id" />
+          <TodoListItem
+            :data="todo"
+            v-for="todo in todos"
+            :key="todo.id"
+            @refresh-page="getItem"
+          />
         </tbody>
       </table>
     </div>
@@ -43,42 +49,30 @@ export default {
     };
   },
   mounted() {
-    this.isLoading = true;
+    this.getItem();
+  },
+  methods: {
+    getItem() {
+      this.isLoading = true;
 
-    Axios.get("https://jsonplaceholder.typicode.com/todos")
-      .then(res => {
-        this.todos = res.data;
+      Axios.get("http://localhost:3001/todos")
+        .then(res => {
+          this.todos = res.data;
 
-        if (this.todos.length === 0) {
-          this.isEmpty = true;
-        }
+          if (this.todos.length === 0) {
+            this.isEmpty = true;
+          }
 
-        this.isLoading = false;
-      })
-      .catch(err => {
-        console.error(err);
+          this.isLoading = false;
+        })
+        .catch(err => {
+          console.error(err);
 
-        this.isError = true;
-        this.isLoading = false;
-      });
+          this.isError = true;
+          this.isLoading = false;
+        });
+    }
   }
-  // async mounted() {
-  //   this.isLoading = true;
-  //   try {
-  //     const res = await Axios.get("https://jsonplaceholder.typicode.com/todos");
-
-  //     this.todos = res.data;
-
-  //     if (this.todos.length === 0) {
-  //       this.isEmpty = true;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-
-  //     this.isError = true;
-  //   }
-  //   this.isLoading = false;
-  // }
 };
 </script>
 <style scoped></style>
