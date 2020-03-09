@@ -1,24 +1,22 @@
 <template>
-  <b-container fluid="md" class="mt--4">
+  <b-container fluid="md" style="margin-top: 24px;">
     <div v-if="!isError">
       <h1>Detail {{ this.$route.params.id }}</h1>
-      <nuxt-link to="/todo"><button>Kembali</button></nuxt-link>
-      <nuxt-link :to="'/todo/' + this.$route.params.id + '/edit'"
-        ><button>Edit</button></nuxt-link
-      >
-
-      <h3 class="mt--4">{{ todo.title }}</h3>
-      <h6>{{ todo.completed ? "Selesai" : "Belum Selesai" }}</h6>
+      <nuxt-link to="/todo"><b-button>Kembali</b-button></nuxt-link>
+      <nuxt-link :to="'/todo/' + this.$route.params.id + '/edit'">
+        <b-button variant="warning">Edit</b-button>
+      </nuxt-link>
+      <h3 style="margin-top: 24px;">{{ todo.title }}</h3>
+      <b-badge v-if="todo.completed" variant="success">Selesai</b-badge>
+      <b-badge v-else variant="danger">Belum Selesai</b-badge>
     </div>
   </b-container>
 </template>
 
 <script>
-import TodoListItem from "~/components/ListItem";
 import Axios from "axios";
 
 export default {
-  components: { TodoListItem },
   data() {
     return {
       todo: {},
