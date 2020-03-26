@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid="md" style="margin-top: 24px;">
+  <div>
     <h1 style="margin-bottom: 24px;">Todo List</h1>
     <div class="row">
       <div class="col-md-6">
@@ -51,7 +51,7 @@
         </b-tbody>
       </b-table-simple>
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>

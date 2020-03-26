@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid="md" style="margin-top: 24px;">
+  <div>
     <div class="row">
       <div class="col">
         <h1>Update Todo</h1>
@@ -41,7 +41,7 @@
     <div v-if="isError">
       <b-alert show variant="danger">Error Bro</b-alert>
     </div>
-  </b-container>
+  </div>
 </template>
 <script>
 import Axios from "axios";

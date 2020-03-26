@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid="md" style="margin-top: 24px;">
+  <div>
     <div v-if="!isError">
       <h1>Detail {{ this.$route.params.id }}</h1>
       <nuxt-link to="/todo"><b-button>Kembali</b-button></nuxt-link>
@@ -10,7 +10,7 @@
       <b-badge v-if="todo.completed" variant="success">Selesai</b-badge>
       <b-badge v-else variant="danger">Belum Selesai</b-badge>
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
